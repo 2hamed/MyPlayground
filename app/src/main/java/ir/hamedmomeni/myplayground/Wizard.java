@@ -1,7 +1,6 @@
 package ir.hamedmomeni.myplayground;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,25 +8,31 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ViewFlipper;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
+import butterknife.InjectView;
+
 
 public class Wizard extends Activity {
     private static final View NULL = null;
+    @InjectView(R.id.flipper)
     ViewFlipper vf;
     RelativeLayout wrapper;
-    private float lastX, width;
     int currentSlide = 1;
+    // Using the following method, we will handle all screen swaps.
+    int i;
+    private float lastX, width;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_wizard);
         wrapper = (RelativeLayout) findViewById(R.id.wrapper);
-        vf = (ViewFlipper) findViewById(R.id.flipper);
+        //vf = (ViewFlipper) findViewById(R.id.flipper);
         width = 640; //iv.getMeasuredWidth();
         SlidingMenu menu = new SlidingMenu(this);
         menu.setMode(SlidingMenu.LEFT);
@@ -49,7 +54,6 @@ public class Wizard extends Activity {
         menu1.setMenu(R.layout.slidingmenu);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -69,8 +73,6 @@ public class Wizard extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    // Using the following method, we will handle all screen swaps.
-    int i;
     public boolean onTouchEvent(MotionEvent touchevent) {
         switch (touchevent.getAction()) {
 
